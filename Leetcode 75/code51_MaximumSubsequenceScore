@@ -1,0 +1,25 @@
+class Solution {
+    public long maxScore(int[] nums1, int[] nums2, int k) {
+        int[][] pair = new int[nums1.length][2];
+
+        for(int i = 0; i < nums1.length; i++) {
+            pair[i][0] = nums2[i];
+            pair[i][1] = nums1[i];
+        }
+        Arrays.sort(pair, (a, b) -> b[0] - a[0]);
+        long ans = 0, curr_sum = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i = 0; i < k-1; i++) {
+            curr_sum += pair[i][1];
+            pq.add(pair[i][1]);
+        }
+        for(int i = k-1; i < nums1.length; i++) {
+            curr_sum += pair[i][1];
+            pq.add(pair[i][1]);
+            ans = Math.max(curr_sum*pair[i][0], ans);
+            curr_sum -= pq.peek();
+            pq.poll();
+        }
+        return ans;
+    }
+}

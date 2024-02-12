@@ -1,0 +1,20 @@
+class Solution {
+    public static int countGoodNodes(TreeNode root, int maxValue){
+        if(root == null){
+            return 0;
+        }
+        int count = (root.val >= maxValue) ? 1 : 0;
+        int updatedMaxValue = Math.max(maxValue, root.val);
+
+        count += countGoodNodes(root.left, updatedMaxValue);
+        count += countGoodNodes(root.right, updatedMaxValue);
+
+        return count;
+    }
+    public int goodNodes(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return countGoodNodes(root, Integer.MIN_VALUE);
+    }
+}

@@ -1,0 +1,28 @@
+class Solution {
+    public int minReorder(int n, int[][] connections) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            adj.add(new ArrayList<>());
+        }
+        for(int[] connection : connections){
+            int from = connection[0];
+            int to = connection[1];
+            adj.get(from).add(to);
+            adj.get(to).add(-from);
+        }
+        return dfs(0, adj, new boolean[n]);
+    }
+
+    public int dfs(int current, List<List<Integer>> adj, boolean[] visited){
+        visited[current] = true;
+        int change = 0;
+
+        for(int neighor : adj.get(current)){
+          if(!visited[Math.abs(neighor)]){
+              change += (neighor > 0) ? 1 : 0;
+              change += dfs(Math.abs(neighor), adj, visited);
+          }
+        }
+        return change;
+    }
+}

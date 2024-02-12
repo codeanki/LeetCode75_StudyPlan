@@ -1,0 +1,24 @@
+class Solution {
+
+    public boolean helper(int[][] grid, int row, int col, int rowCount, int colCount){
+        for(int k = 0; k < colCount; k++){
+            if(grid[row][k] != grid[k][col]){
+                return false;
+            }
+        }
+        return true;
+    }
+    public int equalPairs(int[][] grid) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int count = 0;
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                if(helper(grid, i, j, rows, cols)){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}

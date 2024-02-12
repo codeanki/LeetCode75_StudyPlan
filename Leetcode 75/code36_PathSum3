@@ -1,0 +1,30 @@
+class Solution {
+    Map<Long, Integer> mp;
+    int count;
+
+    public void dfs(TreeNode root, long prefixSum , int targetSum){
+        if(root == null){
+            return;
+        }
+        prefixSum += root.val;
+        if(mp.containsKey(prefixSum - targetSum)){
+            count += mp.get(prefixSum - targetSum);
+        }
+        if(targetSum == prefixSum){
+            count++;
+        }
+        mp.put(prefixSum, mp.getOrDefault(prefixSum,0) + 1);
+
+        dfs(root.left, prefixSum, targetSum);
+        dfs(root.right, prefixSum, targetSum);
+
+        mp.put(prefixSum, mp.get(prefixSum) - 1);
+    }
+    public int pathSum(TreeNode root, int targetSum) {
+        mp = new HashMap<>();
+        count = 0;
+        dfs(root, 0, targetSum);
+
+        return count;
+    }
+}

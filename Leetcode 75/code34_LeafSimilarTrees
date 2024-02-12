@@ -1,0 +1,21 @@
+class Solution {
+
+    public void dfs(TreeNode root, List<Integer> leafValues){
+        if(root == null){
+            return;
+        }if(root.left == null && root.right == null){
+            leafValues.add(root.val);
+        }
+        dfs(root.left, leafValues);
+        dfs(root.right, leafValues);
+    }
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> leafValue1 = new ArrayList<>();
+        List<Integer> leafValue2 = new ArrayList<>();
+
+        dfs(root1, leafValue1);
+        dfs(root2, leafValue2);
+
+        return leafValue1.equals(leafValue2);
+    }
+}

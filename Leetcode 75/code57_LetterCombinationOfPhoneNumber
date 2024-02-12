@@ -1,0 +1,34 @@
+class Solution {
+
+    public void helper(String digits, int index, Map<Character, String> mp, StringBuilder combinations, List<String> answer){
+        if(index == digits.length()){
+            answer.add(combinations.toString());
+            return;
+        }
+        char currentdigit = digits.charAt(index);
+        String letters = mp.get(currentdigit);
+        for(char letter : letters.toCharArray()){
+            combinations.append(letter);
+            helper(digits, index+1,mp,combinations,answer);
+            combinations.deleteCharAt(combinations.length() - 1);
+        }
+    }
+    public List<String> letterCombinations(String digits) {
+        List<String> answer = new ArrayList<>();
+        if(digits == null || digits.length() == 0){
+            return answer;
+        }
+        HashMap<Character, String> mp = new HashMap<>();
+        mp.put('2',"abc");
+        mp.put('3',"def");
+        mp.put('4',"ghi");
+        mp.put('5',"jkl");
+        mp.put('6',"mno");
+        mp.put('7',"pqrs");
+        mp.put('8',"tuv");
+        mp.put('9',"wxyz");
+        StringBuilder combinations = new StringBuilder();
+        helper(digits,0,mp,combinations,answer);
+        return answer;
+    }
+}

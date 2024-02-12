@@ -1,0 +1,28 @@
+class SmallestInfiniteSet {
+    
+    HashSet<Integer> set;
+    PriorityQueue<Integer> pq;
+
+    public SmallestInfiniteSet() {
+        set = new HashSet<>(1000);
+        pq = new PriorityQueue<>(1000);
+
+        for(int i = 1; i <= 1000; i++){
+            pq.add(i);
+            set.add(i);
+        }
+    }
+    
+    public int popSmallest() {
+        int val = pq.poll();
+        set.remove(val);
+        return val;
+    }
+    
+    public void addBack(int num) {
+        if(!set.contains(num)){
+            set.add(num);
+            pq.add(num);
+        }
+    }
+}

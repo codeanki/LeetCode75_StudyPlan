@@ -1,0 +1,26 @@
+class Solution {
+
+    private int maxlength = 0;
+
+    public void dfs(TreeNode root, int length, boolean isRight){
+        if(root == null){
+            return;
+        }
+        maxlength = Math.max(maxlength, length);
+        if(isRight){
+            dfs(root.right, length + 1, false);
+            dfs(root.left, 1, true);
+        }else{
+            dfs(root.left, length + 1, true);
+            dfs(root.right, 1, false);
+        }
+    }
+    public int longestZigZag(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        dfs(root.left, 1, true);
+        dfs(root.right, 1 , false);
+        return maxlength;
+    }
+}
