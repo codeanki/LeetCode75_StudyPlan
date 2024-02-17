@@ -1,2 +1,2 @@
 # LeetCode75_StudyPlan
-eetcode.com/studyplan/leetcode-75/
+https://leetcode.com/studyplan/leetcode-75/
